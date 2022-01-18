@@ -10,11 +10,13 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../App";
 
 const theme = createTheme();
 
 export default function SignIn() {
   const history = useHistory();
+  const logging = React.useContext(UserContext);
 
   const [username, setUsrname1] = useState("");
   const [password, setPassword1] = useState("");
@@ -28,7 +30,8 @@ export default function SignIn() {
       password: password,
     })
       .then((response) => {
-        console.log(response);
+        logging.setLogedUser(response.data[0].username);
+        console.log(response.data);
         localStorage.setItem("token", "test");
         history.push("/");
       })
