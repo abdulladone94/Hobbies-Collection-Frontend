@@ -30,9 +30,10 @@ export default function SignIn() {
       password: password,
     })
       .then((response) => {
+        localStorage.setItem("userNameToken", response.data[0].username);
         logging.setLogedUser(response.data[0].username);
-        console.log(response.data);
-        localStorage.setItem("token", "test");
+
+        localStorage.setItem("logInToken", "SignIn");
         history.push("/");
       })
       .catch((err) => {

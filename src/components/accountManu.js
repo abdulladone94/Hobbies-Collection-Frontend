@@ -9,10 +9,8 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { useHistory } from "react-router-dom";
-import { UserContext } from "../App";
 
 export default function AccountMenu() {
-  const logging = React.useContext(UserContext);
   const history = useHistory();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -83,14 +81,15 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar /> {logging.logedUser}
+          <Avatar /> {localStorage.getItem("userNameToken")}
         </MenuItem>
 
         <Divider />
 
         <MenuItem
           onClick={() => {
-            localStorage.removeItem("token");
+            localStorage.removeItem("userNameToken");
+            localStorage.removeItem("logInToken");
             history.push("/");
           }}
         >

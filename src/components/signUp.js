@@ -51,8 +51,10 @@ export default function SignUp() {
       email: emailReg,
     })
       .then((response) => {
+        localStorage.setItem("userNameToken", response.data.username);
         logging.setLogedUser(response.data.username);
-        localStorage.setItem("token", "something");
+
+        localStorage.setItem("logInToken", "SignUp");
         history.push("/");
       })
       .catch((err) => {

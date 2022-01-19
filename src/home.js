@@ -118,7 +118,7 @@ const Home = () => {
     });
   };
 
-  if (!localStorage.getItem("token")) {
+  if (!localStorage.getItem("logInToken")) {
     return <Redirect to="/login" />;
   }
   return (
