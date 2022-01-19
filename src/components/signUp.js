@@ -12,11 +12,14 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../App";
 
 const theme = createTheme();
 
 export default function SignUp() {
+  const logging = React.useContext(UserContext);
   const history = useHistory();
+
   const [usernameReg, setUsrnameReg] = useState("");
   const [passwordReg, setPasswordReg] = useState("");
   const [emailReg, setEmailReg] = useState("");
@@ -48,8 +51,10 @@ export default function SignUp() {
       email: emailReg,
     })
       .then((response) => {
-        console.log(response);
-        localStorage.setItem("token", "something");
+        localStorage.setItem("userNameToken", response.data.username);
+        logging.setLogedUser(response.data.username);
+
+        localStorage.setItem("logInToken", "SignUp");
         history.push("/");
       })
       .catch((err) => {
